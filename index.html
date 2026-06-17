@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IAM Tech Lab</title>
+
+  <!-- Google Fonts: a friendly heading font (Poppins) + an easy-to-read body font (Inter) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Our own stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ======================================================
+       HEADER / NAVIGATION
+       A simple top bar with the logo and links to each section.
+  ======================================================= -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="#hero" class="logo">IAM <span>Tech Lab</span></a>
+
+      <!-- Hamburger menu button for mobile -->
+      <button id="mobileMenuToggle" class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+        <span class="hamburger"></span>
+      </button>
+
+      <!-- Simple navigation menu -->
+      <nav class="main-nav" id="mobileMenu">
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Theme toggle button -->
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <span class="theme-icon">◯</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ======================================================
+       HERO / HOMEPAGE SECTION
+       The big welcome area people see first.
+  ======================================================= -->
+  <section id="hero" class="hero">
+    <div class="container hero-content">
+      <p class="eyebrow">Welcome to</p>
+      <h1>IAM Tech Lab</h1>
+      <p class="hero-text">
+        We help people and businesses learn, build, and grow with
+        technology — one project at a time.
+      </p>
+
+      <div class="hero-buttons">
+        <!-- This button is wired up in script.js to change the message below -->
+        <button id="tipButton" class="btn btn-primary" aria-label="Get a random tech tip">Get a Quick Tech Tip</button>
+        <a href="#contact" class="btn btn-secondary">Contact Us</a>
+      </div>
+
+      <!-- This paragraph starts empty and is filled in by JavaScript -->
+      <!-- aria-live="polite" announces when the tip updates for screen readers -->
+      <p id="tipMessage" class="tip-message" role="status" aria-live="polite" aria-label="Tech tip message"></p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       ABOUT SECTION
+  ======================================================= -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2>About Us</h2>
+      <p>
+        IAM Tech Lab is a small, friendly tech team that believes technology
+        should be easy to understand, not intimidating. Whether you're a
+        student taking your first coding class or a business owner who needs
+        a simple website, we focus on clear explanations and practical
+        results rather than confusing jargon.
+      </p>
+
+      <!-- A few simple highlight boxes -->
+      <div class="about-grid">
+        <div class="about-card">
+          <h3>50+</h3>
+          <p>Projects completed</p>
+        </div>
+        <div class="about-card">
+          <h3>30+</h3>
+          <p>Happy clients</p>
+        </div>
+        <div class="about-card">
+          <h3>5</h3>
+          <p>Years of experience</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SERVICES SECTION
+  ======================================================= -->
+  <section id="services" class="section alt-bg">
+    <div class="container">
+      <h2>Our Services</h2>
+      <p class="section-subtitle">A few of the ways we can help you.</p>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">💻</div>
+          <h3>Web Development</h3>
+          <p>Clean, fast, mobile-friendly websites built around what your visitors actually need.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">📚</div>
+          <h3>Tech Training</h3>
+          <p>Beginner-friendly lessons in coding and computer skills, taught at your own pace.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🛠️</div>
+          <h3>IT Support</h3>
+          <p>Friendly help with everyday tech problems, big or small, explained in plain language.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🚀</div>
+          <h3>Consulting</h3>
+          <p>Practical advice on which tools and technology actually make sense for your goals.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       CONTACT SECTION
+  ======================================================= -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2>Contact Us</h2>
+      <p class="section-subtitle">Have a question or a project in mind? Send us a message.</p>
+
+      <!-- novalidate turns off the browser's built-in validation
+           so our own JavaScript validation in script.js can run instead -->
+      <form id="contactForm" novalidate aria-label="Contact form">
+
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your full name" aria-describedby="nameError" required />
+          <span class="error-message" id="nameError" role="alert"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" id="email" name="email" placeholder="you@example.com" aria-describedby="emailError" required />
+          <span class="error-message" id="emailError" role="alert"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" placeholder="How can we help?" aria-describedby="messageError" required></textarea>
+          <span class="error-message" id="messageError" role="alert"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Send Message</button>
+
+        <!-- This shows a success message after the form passes validation -->
+        <p id="formSuccess" class="form-success" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       FOOTER
+  ======================================================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 IAM Tech Lab. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Our JavaScript file, loaded at the end so the page loads first -->
+  <script src="script.js"></script>
+</body>
+</html>
