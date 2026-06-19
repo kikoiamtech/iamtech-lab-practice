@@ -38,7 +38,7 @@ function updateThemeIcon(theme) {
     themeIcon.textContent = "◐";
     themeToggle.title = "Switch to light mode";
   } else {
-    themeIcon.textContent = "◯";
+    themeIcon.textContent = "☼";
     themeToggle.title = "Switch to dark mode";
   }
 }
