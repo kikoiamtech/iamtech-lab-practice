@@ -169,13 +169,20 @@ const contactForm = document.getElementById("contactForm");
 
 // Input fields
 const nameInput = document.getElementById("name");
-const emailInput = document.getElementById("email");
-const messageInput = document.getElementById("message");
+const emailInput = document.getElementById("businessEmail");
+const companySizeInput = document.getElementById("companySize");
+const packageFitInput = document.getElementById("packageFit");
+const projectLevelInput = document.getElementById("projectLevel");
+const callTimeInput = document.getElementById("callTime");
+const summaryInput = document.getElementById("summary");
 
 // Places to show error text for each field
 const nameError = document.getElementById("nameError");
 const emailError = document.getElementById("emailError");
-const messageError = document.getElementById("messageError");
+const companySizeError = document.getElementById("companySizeError");
+const packageError = document.getElementById("packageError");
+const levelError = document.getElementById("levelError");
+const summaryError = document.getElementById("summaryError");
 
 // Where we show the final "thank you" message
 const formSuccess = document.getElementById("formSuccess");
@@ -199,6 +206,22 @@ function validateField(input, errorElement, validator) {
   }
 }
 
+// Helper function for select fields (no trim needed)
+function validateSelect(select, errorElement, validator) {
+  const value = select.value;
+  const error = validator(value);
+  
+  if (error) {
+    errorElement.textContent = error;
+    select.classList.add("input-error");
+    return false;
+  } else {
+    errorElement.textContent = "";
+    select.classList.remove("input-error");
+    return true;
+  }
+}
+
 // Validators for each field
 const validators = {
   name: (value) => value === "" ? "Please enter your name." : "",
@@ -207,9 +230,12 @@ const validators = {
     if (!emailPattern.test(value)) return "Please enter a valid email address.";
     return "";
   },
-  message: (value) => {
-    if (value === "") return "Please enter a message.";
-    if (value.length < 10) return "Your message should be at least 10 characters.";
+  companySize: (value) => value === "" ? "Please select a company size." : "",
+  packageFit: (value) => value === "" ? "Please select a package." : "",
+  projectLevel: (value) => value === "" ? "Please select a project level." : "",
+  summary: (value) => {
+    if (value === "") return "Please enter a project summary.";
+    if (value.length < 10) return "Your summary should be at least 10 characters.";
     return "";
   }
 };
@@ -217,12 +243,17 @@ const validators = {
 // Real-time validation on blur
 nameInput.addEventListener("blur", () => validateField(nameInput, nameError, validators.name));
 emailInput.addEventListener("blur", () => validateField(emailInput, emailError, validators.email));
-messageInput.addEventListener("blur", () => validateField(messageInput, messageError, validators.message));
+companySizeInput.addEventListener("blur", () => validateSelect(companySizeInput, companySizeError, validators.companySize));
+packageFitInput.addEventListener("blur", () => validateSelect(packageFitInput, packageError, validators.packageFit));
+projectLevelInput.addEventListener("blur", () => validateSelect(projectLevelInput, levelError, validators.projectLevel));
+summaryInput.addEventListener("blur", () => validateField(summaryInput, summaryError, validators.summary));
+
+// Google Apps Script deployment URL
+const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzwbRkrmY8s2zPrZUHDf_5KrLUQeOi06rgI6PvnuKDYdR0l6tgGLj4LKCalAdH0zWfYbg/exec";
 
 // Form submission validation
 contactForm.addEventListener("submit", function (event) {
-  // Stop the form from actually submitting/reloading the page,
-  // since this site has no backend to send the data to yet.
+  // Stop the form from actually submitting/reloading the page
   event.preventDefault();
 
   // Clear any previous success message
@@ -231,14 +262,92 @@ contactForm.addEventListener("submit", function (event) {
   // Validate all fields
   const isNameValid = validateField(nameInput, nameError, validators.name);
   const isEmailValid = validateField(emailInput, emailError, validators.email);
-  const isMessageValid = validateField(messageInput, messageError, validators.message);
+  const isCompanySizeValid = validateSelect(companySizeInput, companySizeError, validators.companySize);
+  const isPackageValid = validateSelect(packageFitInput, packageError, validators.packageFit);
+  const isLevelValid = validateSelect(projectLevelInput, levelError, validators.projectLevel);
+  const isSummaryValid = validateField(summaryInput, summaryError, validators.summary);
+  // Call time is optional, so no validation needed
 
-  // If every field passed its check, show a success message and reset the form.
-  if (isNameValid && isEmailValid && isMessageValid) {
-    formSuccess.textContent = "Thanks! Your message has been received.";
-    contactForm.reset();
-    nameInput.classList.remove("input-error");
-    emailInput.classList.remove("input-error");
-    messageInput.classList.remove("input-error");
+  // If every field passed its check, submit to Google Sheets
+  if (isNameValid && isEmailValid && isCompanySizeValid && isPackageValid && isLevelValid && isSummaryValid) {
+    submitToGoogleSheet({
+      name: nameInput.value.trim(),
+      email: emailInput.value.trim(),
+      companySize: companySizeInput.value,
+      packageFit: packageFitInput.value,
+      projectLevel: projectLevelInput.value,
+      callTime: callTimeInput.value,
+      summary: summaryInput.value.trim()
+    });
   }
 });
+
+// Function to submit data to Google Apps Script
+function submitToGoogleSheet(data) {
+  // Show loading state
+  const submitButton = contactForm.querySelector('button[type="submit"]');
+  const originalText = submitButton.textContent;
+  submitButton.textContent = "Sending...";
+  submitButton.disabled = true;
+
+  // Create FormData object for better compatibility
+  const formData = new FormData();
+  formData.append("name", data.name);
+  formData.append("email", data.email);
+  formData.append("companySize", data.companySize);
+  formData.append("packageFit", data.packageFit);
+  formData.append("projectLevel", data.projectLevel);
+  formData.append("callTime", data.callTime);
+  formData.append("summary", data.summary);
+
+  fetch(GOOGLE_APPS_SCRIPT_URL, {
+    method: "POST",
+    body: formData
+  })
+    .then(response => {
+      // Google Apps Script might return HTML, so check the status
+      if (response.ok) {
+        return response.text();
+      } else {
+        throw new Error("Server error: " + response.status);
+      }
+    })
+    .then(result => {
+      // Try to parse as JSON, but handle HTML responses too
+      let parsed;
+      try {
+        parsed = JSON.parse(result);
+      } catch (e) {
+        // If it's not JSON, the request likely succeeded anyway
+        parsed = { success: true };
+      }
+      
+      if (parsed.success !== false) {
+        // Show success message
+        formSuccess.textContent = "Thanks! Your inquiry has been received. We'll be in touch soon.";
+        formSuccess.style.color = "#68d391";
+        
+        // Reset the form
+        contactForm.reset();
+        nameInput.classList.remove("input-error");
+        emailInput.classList.remove("input-error");
+        companySizeInput.classList.remove("input-error");
+        packageFitInput.classList.remove("input-error");
+        projectLevelInput.classList.remove("input-error");
+        summaryInput.classList.remove("input-error");
+      } else {
+        formSuccess.textContent = "Error: " + (parsed.error || "Failed to submit. Please try again.");
+        formSuccess.style.color = "#ff8080";
+      }
+    })
+    .catch(error => {
+      console.error("Error:", error);
+      formSuccess.textContent = "Error submitting form. Please try again.";
+      formSuccess.style.color = "#ff8080";
+    })
+    .finally(() => {
+      // Restore button state
+      submitButton.textContent = originalText;
+      submitButton.disabled = false;
+    });
+}
