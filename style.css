@@ -1451,9 +1451,14 @@ img {
 }
 
 @media (max-width: 768px) {
+  /* .site-header is `position: fixed`, so it's the containing block
+     for .main-nav here. Anchoring with top: 100% instead of a
+     hardcoded pixel value means the dropdown always sits flush
+     against the header's real bottom edge — even when the logo
+     wraps to two lines and the header grows taller than expected. */
   .main-nav {
-    position: fixed;
-    top: 69px;
+    position: absolute;
+    top: 100%;
     left: 0;
     right: 0;
     z-index: 99;
@@ -1461,22 +1466,35 @@ img {
     backdrop-filter: blur(var(--glass-blur));
     -webkit-backdrop-filter: blur(var(--glass-blur));
     border-bottom: none;
+    border-radius: 0 0 16px 16px;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease, border-bottom-color 0.3s ease;
+    transition: max-height 0.3s ease, border-bottom-color 0.3s ease, box-shadow 0.3s ease;
     box-shadow: none;
   }
 
   .main-nav.active {
     max-height: 400px;
     border-bottom: 1px solid var(--glass-border);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.18);
   }
 
   .main-nav ul {
     flex-direction: column;
     padding: 20px;
     gap: 16px;
+  }
+
+  /* .site-header .main-nav a sets white text for the dark desktop
+     bar; once the nav collapses into the mobile dropdown it sits on
+     var(--color-bg) instead, so the link color must be re-pointed
+     to the theme-aware text color or it goes invisible in light mode. */
+  .site-header .main-nav a {
+    color: var(--color-text);
+  }
+
+  .site-header .main-nav a:hover {
+    color: var(--color-accent-dark);
   }
 
   .mobile-menu-toggle {
