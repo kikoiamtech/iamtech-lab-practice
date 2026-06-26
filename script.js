@@ -87,7 +87,6 @@ document.addEventListener("keydown", (event) => {
 
 // ---------- 2. Tech Insight Feature ----------
 
-// Professional-grade insights for a business audience.
 const techTips = [
   "Insight: Documenting your IT environment before a migration reduces average project overruns by up to 35%.",
   "Insight: Multi-factor authentication blocks over 99% of automated credential attacks — prioritize it for all privileged accounts.",
@@ -131,7 +130,8 @@ function showRandomTip() {
   displayTip(randomTip);
 }
 
-if (tipButton) {
+// Safely bind event listeners only if elements exist (e.g. index.html)
+if (tipButton && tipMessage) {
   tipButton.addEventListener("click", showRandomTip);
   tipButton.addEventListener("keypress", function (event) {
     if (event.key === "Enter") showRandomTip();
@@ -142,155 +142,158 @@ if (tipButton) {
 
 const contactForm = document.getElementById("contactForm");
 
-const nameInput = document.getElementById("name");
-const emailInput = document.getElementById("businessEmail");
-const companySizeInput = document.getElementById("companySize");
-const packageFitInput = document.getElementById("packageFit");
-const projectLevelInput = document.getElementById("projectLevel");
-const callTimeInput = document.getElementById("callTime");
-const summaryInput = document.getElementById("summary");
+// Wrap form logic inside a null check (e.g. for contact.html)
+if (contactForm) {
+  const nameInput = document.getElementById("name");
+  const emailInput = document.getElementById("businessEmail");
+  const companySizeInput = document.getElementById("companySize");
+  const packageFitInput = document.getElementById("packageFit");
+  const projectLevelInput = document.getElementById("projectLevel");
+  const callTimeInput = document.getElementById("callTime");
+  const summaryInput = document.getElementById("summary");
 
-const nameError = document.getElementById("nameError");
-const emailError = document.getElementById("emailError");
-const companySizeError = document.getElementById("companySizeError");
-const packageError = document.getElementById("packageError");
-const levelError = document.getElementById("levelError");
-const summaryError = document.getElementById("summaryError");
+  const nameError = document.getElementById("nameError");
+  const emailError = document.getElementById("emailError");
+  const companySizeError = document.getElementById("companySizeError");
+  const packageError = document.getElementById("packageError");
+  const levelError = document.getElementById("levelError");
+  const summaryError = document.getElementById("summaryError");
 
-const formSuccess = document.getElementById("formSuccess");
+  const formSuccess = document.getElementById("formSuccess");
 
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-function validateField(input, errorElement, validator) {
-  const value = input.value.trim();
-  const error = validator(value);
-  if (error) {
-    errorElement.textContent = error;
-    input.classList.add("input-error");
-    return false;
-  } else {
-    errorElement.textContent = "";
-    input.classList.remove("input-error");
-    return true;
+  function validateField(input, errorElement, validator) {
+    const value = input.value.trim();
+    const error = validator(value);
+    if (error) {
+      errorElement.textContent = error;
+      input.classList.add("input-error");
+      return false;
+    } else {
+      errorElement.textContent = "";
+      input.classList.remove("input-error");
+      return true;
+    }
   }
-}
 
-function validateSelect(select, errorElement, validator) {
-  const value = select.value;
-  const error = validator(value);
-  if (error) {
-    errorElement.textContent = error;
-    select.classList.add("input-error");
-    return false;
-  } else {
-    errorElement.textContent = "";
-    select.classList.remove("input-error");
-    return true;
+  function validateSelect(select, errorElement, validator) {
+    const value = select.value;
+    const error = validator(value);
+    if (error) {
+      errorElement.textContent = error;
+      select.classList.add("input-error");
+      return false;
+    } else {
+      errorElement.textContent = "";
+      select.classList.remove("input-error");
+      return true;
+    }
   }
-}
 
-const validators = {
-  name:         (value) => value === "" ? "Please enter your full name." : "",
-  email:        (value) => {
-    if (value === "") return "Please enter your business email address.";
-    if (!emailPattern.test(value)) return "Please enter a valid email address.";
-    return "";
-  },
-  companySize:  (value) => value === "" ? "Please select your organization size." : "",
-  packageFit:   (value) => value === "" ? "Please select a package." : "",
-  projectLevel: (value) => value === "" ? "Please select a project level." : "",
-  summary:      (value) => {
-    if (value === "") return "Please provide a brief project description.";
-    if (value.length < 10) return "Your project brief should be at least 10 characters.";
-    return "";
-  }
-};
+  const validators = {
+    name:         (value) => value === "" ? "Please enter your full name." : "",
+    email:        (value) => {
+      if (value === "") return "Please enter your business email address.";
+      if (!emailPattern.test(value)) return "Please enter a valid email address.";
+      return "";
+    },
+    companySize:  (value) => value === "" ? "Please select your organization size." : "",
+    packageFit:   (value) => value === "" ? "Please select a package." : "",
+    projectLevel: (value) => value === "" ? "Please select a project level." : "",
+    summary:      (value) => {
+      if (value === "") return "Please provide a brief project description.";
+      if (value.length < 10) return "Your project brief should be at least 10 characters.";
+      return "";
+    }
+  };
 
-// Real-time validation on blur
-nameInput.addEventListener("blur",          () => validateField(nameInput, nameError, validators.name));
-emailInput.addEventListener("blur",         () => validateField(emailInput, emailError, validators.email));
-companySizeInput.addEventListener("blur",   () => validateSelect(companySizeInput, companySizeError, validators.companySize));
-packageFitInput.addEventListener("blur",    () => validateSelect(packageFitInput, packageError, validators.packageFit));
-projectLevelInput.addEventListener("blur",  () => validateSelect(projectLevelInput, levelError, validators.projectLevel));
-summaryInput.addEventListener("blur",       () => validateField(summaryInput, summaryError, validators.summary));
+  // Real-time validation on blur
+  nameInput.addEventListener("blur",          () => validateField(nameInput, nameError, validators.name));
+  emailInput.addEventListener("blur",         () => validateField(emailInput, emailError, validators.email));
+  companySizeInput.addEventListener("blur",   () => validateSelect(companySizeInput, companySizeError, validators.companySize));
+  packageFitInput.addEventListener("blur",    () => validateSelect(packageFitInput, packageError, validators.packageFit));
+  projectLevelInput.addEventListener("blur",  () => validateSelect(projectLevelInput, levelError, validators.projectLevel));
+  summaryInput.addEventListener("blur",       () => validateField(summaryInput, summaryError, validators.summary));
 
-// Google Apps Script deployment URL
-const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwNVg3OfOkCtNOv-cw_YmipGJUnu8cdt_osplJytUvvdsa0fomkOT0B4cAqPZy1Bcn_SA/exec";
+  // Google Apps Script deployment URL
+  const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwNVg3OfOkCtNOv-cw_YmipGJUnu8cdt_osplJytUvvdsa0fomkOT0B4cAqPZy1Bcn_SA/exec";
 
-contactForm.addEventListener("submit", function (event) {
-  event.preventDefault();
-  formSuccess.textContent = "";
+  contactForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    formSuccess.textContent = "";
 
-  const isNameValid         = validateField(nameInput, nameError, validators.name);
-  const isEmailValid        = validateField(emailInput, emailError, validators.email);
-  const isCompanySizeValid  = validateSelect(companySizeInput, companySizeError, validators.companySize);
-  const isPackageValid      = validateSelect(packageFitInput, packageError, validators.packageFit);
-  const isLevelValid        = validateSelect(projectLevelInput, levelError, validators.projectLevel);
-  const isSummaryValid      = validateField(summaryInput, summaryError, validators.summary);
+    const isNameValid         = validateField(nameInput, nameError, validators.name);
+    const isEmailValid        = validateField(emailInput, emailError, validators.email);
+    const isCompanySizeValid  = validateSelect(companySizeInput, companySizeError, validators.companySize);
+    const isPackageValid      = validateSelect(packageFitInput, packageError, validators.packageFit);
+    const isLevelValid        = validateSelect(projectLevelInput, levelError, validators.projectLevel);
+    const isSummaryValid      = validateField(summaryInput, summaryError, validators.summary);
 
-  if (isNameValid && isEmailValid && isCompanySizeValid && isPackageValid && isLevelValid && isSummaryValid) {
-    submitToGoogleSheet({
-      name:         nameInput.value.trim(),
-      email:        emailInput.value.trim(),
-      companySize:  companySizeInput.value,
-      packageFit:   packageFitInput.value,
-      projectLevel: projectLevelInput.value,
-      callTime:     callTimeInput.value,
-      summary:      summaryInput.value.trim()
-    });
-  }
-});
+    if (isNameValid && isEmailValid && isCompanySizeValid && isPackageValid && isLevelValid && isSummaryValid) {
+      submitToGoogleSheet({
+        name:         nameInput.value.trim(),
+        email:        emailInput.value.trim(),
+        companySize:  companySizeInput.value,
+        packageFit:   packageFitInput.value,
+        projectLevel: projectLevelInput.value,
+        callTime:     callTimeInput.value,
+        summary:      summaryInput.value.trim()
+      });
+    }
+  });
 
-function submitToGoogleSheet(data) {
-  const submitButton = contactForm.querySelector('button[type="submit"]');
-  const originalText = submitButton.textContent;
-  submitButton.textContent = "Submitting…";
-  submitButton.disabled = true;
+  function submitToGoogleSheet(data) {
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    const originalText = submitButton.textContent;
+    submitButton.textContent = "Submitting…";
+    submitButton.disabled = true;
 
-  const formData = new FormData();
-  formData.append("name",         data.name);
-  formData.append("email",        data.email);
-  formData.append("companySize",  data.companySize);
-  formData.append("packageFit",   data.packageFit);
-  formData.append("projectLevel", data.projectLevel);
-  formData.append("callTime",     data.callTime);
-  formData.append("summary",      data.summary);
+    const formData = new FormData();
+    formData.append("name",         data.name);
+    formData.append("email",        data.email);
+    formData.append("companySize",  data.companySize);
+    formData.append("packageFit",   data.packageFit);
+    formData.append("projectLevel", data.projectLevel);
+    formData.append("callTime",     data.callTime);
+    formData.append("summary",      data.summary);
 
-  fetch(GOOGLE_APPS_SCRIPT_URL, {
-    method: "POST",
-    body: formData
-  })
-    .then(response => {
-      if (response.ok) return response.text();
-      throw new Error("Server error: " + response.status);
+    fetch(GOOGLE_APPS_SCRIPT_URL, {
+      method: "POST",
+      body: formData
     })
-    .then(result => {
-      let parsed;
-      try {
-        parsed = JSON.parse(result);
-      } catch (e) {
-        parsed = { success: true };
-      }
+      .then(response => {
+        if (response.ok) return response.text();
+        throw new Error("Server error: " + response.status);
+      })
+      .then(result => {
+        let parsed;
+        try {
+          parsed = JSON.parse(result);
+        } catch (e) {
+          parsed = { success: true };
+        }
 
-      if (parsed.success !== false) {
-        formSuccess.textContent = "Your inquiry has been received. A senior consultant will be in touch within one business day.";
-        formSuccess.style.color = "#68d391";
-        contactForm.reset();
-        [nameInput, emailInput, companySizeInput, packageFitInput, projectLevelInput, summaryInput].forEach(el => {
-          el.classList.remove("input-error");
-        });
-      } else {
-        formSuccess.textContent = "Submission error: " + (parsed.error || "Please try again or contact us directly.");
+        if (parsed.success !== false) {
+          formSuccess.textContent = "Your inquiry has been received. A senior consultant will be in touch within one business day.";
+          formSuccess.style.color = "#68d391";
+          contactForm.reset();
+          [nameInput, emailInput, companySizeInput, packageFitInput, projectLevelInput, summaryInput].forEach(el => {
+            el.classList.remove("input-error");
+          });
+        } else {
+          formSuccess.textContent = "Submission error: " + (parsed.error || "Please try again or contact us directly.");
+          formSuccess.style.color = "#ff8080";
+        }
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        formSuccess.textContent = "Submission failed. Please try again or contact us directly at kiko@iamtech.ph.";
         formSuccess.style.color = "#ff8080";
-      }
-    })
-    .catch(error => {
-      console.error("Error:", error);
-      formSuccess.textContent = "Submission failed. Please try again or contact us directly at kiko@iamtech.ph.";
-      formSuccess.style.color = "#ff8080";
-    })
-    .finally(() => {
-      submitButton.textContent = originalText;
-      submitButton.disabled = false;
-    });
+      })
+      .finally(() => {
+        submitButton.textContent = originalText;
+        submitButton.disabled = false;
+      });
+  }
 }

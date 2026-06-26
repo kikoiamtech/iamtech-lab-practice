@@ -127,13 +127,16 @@ img {
 .container {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 24px; /* Standardized page edge alignment boundary */
   position: relative;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .section {
   padding: 100px 0;
   position: relative;
+  width: 100%;
 }
 
 .alt-bg {
@@ -322,7 +325,6 @@ img {
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
 }
 
-/* Nav text white on dark header */
 .site-header .main-nav a {
   color: rgba(255, 255, 255, 0.78);
 }
@@ -508,7 +510,6 @@ img {
   padding: 0;
 }
 
-/* Full-bleed background photo covering the right portion */
 .hero::before {
   content: "";
   position: absolute;
@@ -520,7 +521,6 @@ img {
   z-index: 0;
 }
 
-/* Dark gradient overlay — heavier on the left so text is legible */
 .hero::after {
   content: "";
   position: absolute;
@@ -593,7 +593,6 @@ img {
   flex-wrap: wrap;
 }
 
-/* Override secondary button for dark hero bg */
 .hero .btn-secondary {
   background: rgba(255, 255, 255, 0.08);
   color: #ffffff;
@@ -634,7 +633,6 @@ img {
   color: var(--color-accent);
 }
 
-/* Feature columns strip at the bottom of the hero */
 .hero-stats {
   position: relative;
   z-index: 2;
@@ -675,7 +673,7 @@ img {
   line-height: 1.5;
 }
 
-/* ---------- 8. Value cards (stained-glass virtue panels) ---------- */
+/* ---------- 7. Value cards (stained-glass virtue panels) ---------- */
 .value-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -736,7 +734,7 @@ img {
   color: var(--color-text-light);
 }
 
-/* ---------- 9. About split ---------- */
+/* ---------- 8. About split ---------- */
 .about-split {
   display: grid;
   grid-template-columns: 1.1fr 1fr;
@@ -797,7 +795,6 @@ img {
   filter: brightness(1.22) contrast(1.1) saturate(1.12);
 }
 
-/* About pillars — three feature cards below copy (NeoLabs-inspired) */
 .about-pillars {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -853,18 +850,9 @@ img {
 }
 
 @media (max-width: 1024px) {
-  .about-pillars {
-    grid-template-columns: 1fr;
-  }
+  .about-pillars { grid-template-columns: 1fr; }
 }
 
-@media (max-width: 768px) {
-  .about-pillars {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Fallback placeholder styles (kept for reference) */
 .image-placeholder {
   background: var(--glass-fill);
   border: 1px solid var(--glass-border);
@@ -893,7 +881,7 @@ img {
   margin-top: 4px;
 }
 
-/* ---------- 10. SERVICES — server-rack altars ---------- */
+/* ---------- 9. SERVICES — server-rack altars ---------- */
 .services-altar-section {
   position: relative;
 }
@@ -1026,7 +1014,7 @@ img {
   background: rgba(0, 191, 255, 0.4);
 }
 
-/* ---------- 11. Process steps ---------- */
+/* ---------- 10. Process steps ---------- */
 .process-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1069,7 +1057,7 @@ img {
   color: var(--color-text-light);
 }
 
-/* ---------- 12. Pricing ---------- */
+/* ---------- 11. Pricing (Standard Card Grid Layout) ---------- */
 .pricing-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1163,7 +1151,7 @@ img {
   width: 100%;
 }
 
-/* ---------- 13. Testimonial ---------- */
+/* ---------- 12. Testimonial ---------- */
 .testimonial-block {
   max-width: 760px;
   margin: 0 auto;
@@ -1217,7 +1205,7 @@ img {
   text-align: left;
 }
 
-/* ---------- 14. Final CTA band ---------- */
+/* ---------- 13. Final CTA band ---------- */
 .cta-band {
   background: linear-gradient(135deg, var(--color-navy-surface), #0e3a63);
   position: relative;
@@ -1257,7 +1245,7 @@ img {
   flex-shrink: 0;
 }
 
-/* ---------- 15. Contact form ---------- */
+/* ---------- 14. Contact form ---------- */
 #contact h2 {
   font-size: clamp(1.8rem, 3vw, 2.3rem);
   margin-bottom: 14px;
@@ -1352,7 +1340,7 @@ img {
   max-width: 640px;
 }
 
-/* ---------- 16. Footer ---------- */
+/* ---------- 15. Footer ---------- */
 .site-footer {
   background: var(--color-navy-surface);
   color: rgba(255, 255, 255, 0.82);
@@ -1435,7 +1423,7 @@ img {
   color: rgba(255, 255, 255, 0.55);
 }
 
-/* ---------- 17. Responsive ---------- */
+/* ---------- 16. Responsive ---------- */
 @media (max-width: 1024px) {
   .value-grid,
   .services-grid,
@@ -1545,7 +1533,7 @@ img {
   }
 }
 
-/* ---------- 18. Accessibility ---------- */
+/* ---------- 17. Accessibility ---------- */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
@@ -1560,5 +1548,273 @@ textarea:focus-visible {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+  }
+}
+
+/* =========================================================
+   EXTENDED PRICING PAGE ARCHITECTURE (NEOLABS INSPIRED)
+========================================================= */
+
+/* ---------- 18. Pricing hero split ---------- */
+.pricing-hero-split {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 56px;
+  align-items: center;
+  padding-top: 160px;
+  padding-bottom: 80px;
+}
+
+.pricing-hero-copy h1 {
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  margin-top: 12px;
+  margin-bottom: 24px;
+}
+
+.pricing-hero-image img {
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-glow-md);
+  border: 1px solid var(--glass-border);
+  width: 100%;
+  height: auto;
+}
+
+/* ---------- 19. Extended pricing grid ---------- */
+.grid-2x2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  padding-bottom: 100px;
+}
+
+.pricing-card-extended {
+  background: var(--glass-fill);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 40px;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--shadow-glow-sm);
+}
+
+.pricing-card-extended h3 {
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+.pricing-extended-features {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pricing-extended-features li {
+  font-size: 0.95rem;
+  position: relative;
+  padding-left: 24px;
+  color: var(--color-text);
+}
+
+.pricing-extended-features li::before {
+  content: "•";
+  position: absolute;
+  left: 4px;
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+/* ---------- 20. Commercial guide table ---------- */
+.guide-section {
+  padding: 90px 0;
+  border-top: 1px solid var(--glass-border);
+}
+
+.guide-title {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  max-width: 680px;
+  margin-top: 12px;
+  margin-bottom: 48px;
+}
+
+.table-responsive-wrapper {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.commercial-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--glass-fill);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.commercial-table th,
+.commercial-table td {
+  padding: 24px;
+  text-align: left;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.commercial-table th {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+  font-weight: 600;
+}
+
+.commercial-table tr:last-child td {
+  border-bottom: none;
+}
+
+.commercial-table td strong {
+  color: var(--color-primary);
+  font-size: 1.1rem;
+}
+
+/* ---------- 21. Scale deep-dive blocks ---------- */
+.scale-deep-dive {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 56px;
+  padding: 90px 0;
+  border-top: 1px solid var(--glass-border);
+}
+
+.scale-cards-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.scale-feature-block {
+  background: var(--glass-fill);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 28px;
+}
+
+.scale-feature-block h4 {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent-dark);
+  margin-bottom: 12px;
+}
+
+.scale-feature-block p {
+  color: var(--color-text-light);
+  font-size: 0.95rem;
+}
+
+/* ---------- 22. Operational responsibility panel ---------- */
+.responsibility-panel {
+  background: var(--glass-fill-strong);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 56px;
+  margin-top: 40px;
+  margin-bottom: 80px;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 48px;
+}
+
+.responsibility-text h3 {
+  font-size: 2.2rem;
+  line-height: 1.2;
+}
+
+.responsibility-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.responsibility-item p {
+  font-size: 0.95rem;
+  color: var(--color-text-light);
+  margin-top: 4px;
+}
+
+/* ---------- 23. Next step card box ---------- */
+.next-step-box {
+  background: linear-gradient(135deg, var(--glass-fill-strong), var(--glass-fill));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 64px;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 100px;
+}
+
+.next-step-box h2 {
+  font-size: 2.4rem;
+  max-width: 500px;
+  margin-top: 12px;
+  margin-bottom: 16px;
+}
+
+.next-step-box .btn-primary {
+  background: #2dd4bf;
+  color: #0d1421;
+  padding: 16px 32px;
+}
+
+/* =========================================================
+   24. GLOBAL LAYOUT UNIFICATION & BOUNDARY FIXES
+
+   These rules push the first section on sub-pages (anything
+   that isn't the full-bleed .hero) down below the fixed
+   69px header. !important is needed here because .section
+   already sets its own padding-top and would otherwise win
+   on specificity alone.
+========================================================= */
+body > main,
+body > .container > section:first-of-type,
+body > section:first-of-type:not(.hero) {
+  padding-top: 140px !important;
+}
+
+main {
+  width: 100%;
+  display: block;
+}
+
+/* Responsive overrides for the extended pricing layout */
+@media (max-width: 960px) {
+  .pricing-hero-split,
+  .grid-2x2,
+  .scale-deep-dive,
+  .responsibility-panel,
+  .next-step-box {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .next-step-box {
+    text-align: center;
+    justify-content: center;
+    padding: 40px;
+  }
+
+  .next-step-box .btn {
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  body > main,
+  body > .container > section:first-of-type,
+  body > section:first-of-type:not(.hero) {
+    padding-top: 110px !important;
   }
 }

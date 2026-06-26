@@ -5,42 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>IAM Tech Lab — Enterprise Technology Solutions</title>
 
-  <!-- SEO: meta description -->
   <meta name="description" content="IAM Tech Lab partners with mid-sized organizations on web and application development, systems architecture, and technology strategy — delivered with enterprise-grade rigor and transparency." />
 
-  <!-- Open Graph (LinkedIn, Facebook, Viber, etc.) -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="IAM Tech Lab — Enterprise Technology Solutions" />
   <meta property="og:description" content="We design, implement, and manage technology systems that reduce operational risk, accelerate delivery, and create measurable competitive advantage." />
   <meta property="og:image" content="https://www.iamtech.ph/photos/company_logo.png" />
   <meta property="og:url" content="https://www.iamtech.ph/" />
 
-  <!-- Twitter/X card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="IAM Tech Lab — Enterprise Technology Solutions" />
   <meta name="twitter:description" content="Enterprise-grade technology strategy and execution for mid-sized organizations." />
 
-  <!-- Google Fonts: Cormorant Garamond (display, illuminated-manuscript feel)
-       + Space Grotesk (body/UI, geometric & technical) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Favicon / app icons -->
   <link rel="icon" type="image/png" href="photos/company_logo.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="photos/company_logo.png" />
   <link rel="icon" type="image/png" sizes="180x180" href="photos/company_logo.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="photos/company_logo.png" />
 
-  <!-- Our own stylesheet -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Ambient background layer: marble veining + drifting holy light -->
   <div class="cd-atmosphere" aria-hidden="true">
     <div class="cd-marble-veins"></div>
     <div class="cd-orb cd-orb-1"></div>
@@ -48,12 +37,9 @@
     <div class="cd-orb cd-orb-3"></div>
   </div>
 
-  <!-- ======================================================
-       HEADER / NAVIGATION — frosted holographic glass bar
-  ======================================================= -->
   <header class="site-header">
     <div class="container nav-wrapper">
-      <a href="#hero" class="logo-block">
+      <a href="index.html" class="logo-block">
         <img src="photos/company_logo.png" alt="IAM Tech Lab" class="logo-icon" width="36" height="36" />
         <span class="logo-text">
           <span class="logo">IAM <span>Tech Lab</span></span>
@@ -61,42 +47,32 @@
         </span>
       </a>
 
-      <!-- Mobile-only icon CTA: quick link to Contact/Book a Call -->
-      <a href="#contact" class="header-cta-icon" aria-label="Book a call">
+      <a href="contact.html" class="header-cta-icon" aria-label="Book a call">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
       </a>
 
-      <!-- Hamburger menu button for mobile -->
       <button id="mobileMenuToggle" class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
         <span class="hamburger"></span>
       </button>
 
-      <!-- Main navigation -->
       <nav class="main-nav" id="mobileMenu">
         <ul>
-          <li><a href="#hero">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#process">Process</a></li>
-          <li><a href="#pricing">Pricing</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
 
-      <!-- Theme toggle button — toggles between Daylight Marble and Halo (luminous) states -->
       <button id="themeToggle" class="theme-toggle" aria-label="Toggle halo mode" title="Toggle halo mode">
         <span class="theme-icon">◯</span>
       </button>
 
-      <!-- Persistent header CTA -->
-      <a href="#contact" class="btn btn-primary header-cta">Book a Call</a>
+      <a href="contact.html" class="btn btn-primary header-cta">Book a Call</a>
     </div>
   </header>
 
-  <!-- ======================================================
-       HERO SECTION — the nave: light falling through a
-       cathedral of circuitry
-  ======================================================= -->
   <section id="hero" class="hero">
     <div class="container hero-content">
       <div class="hero-text-wrap">
@@ -110,11 +86,10 @@
         </p>
 
         <div class="hero-buttons">
-          <a href="#contact" class="btn btn-primary">Schedule a Consultation</a>
-          <a href="#services" class="btn btn-secondary">View Pricing</a>
+          <a href="contact.html" class="btn btn-primary">Schedule a Consultation</a>
+          <a href="services.html" class="btn btn-secondary">View Services</a>
         </div>
 
-        <!-- Tech Tip feature -->
         <p id="tipMessage" class="tip-message" role="status" aria-live="polite" aria-label="Tech insight"></p>
         <button id="tipButton" class="tip-trigger" aria-label="Get a quick tech insight">
           ▶ Get a Quick Tech Insight
@@ -122,7 +97,6 @@
       </div>
     </div>
 
-    <!-- Feature columns strip — pinned to the bottom of the hero -->
     <div class="hero-stats">
       <div class="hero-stat">
         <h3>Built Around Your Workflow</h3>
@@ -143,9 +117,6 @@
     </div>
   </section>
 
-  <!-- ======================================================
-       WHY WORK WITH US — stained-glass virtue panels
-  ======================================================= -->
   <section id="why-us" class="section">
     <div class="container">
       <span class="eyebrow-tag">OUR ADVANTAGE</span>
@@ -158,7 +129,7 @@
             so every engagement produces outcomes you can measure.
           </p>
         </div>
-        <a href="#contact" class="btn btn-outline section-heading-cta">Talk to Our Team</a>
+        <a href="contact.html" class="btn btn-outline section-heading-cta">Talk to Our Team</a>
       </div>
 
       <div class="value-grid">
@@ -194,143 +165,6 @@
     </div>
   </section>
 
-  <!-- ======================================================
-       ABOUT SECTION — NeoLabs-inspired split layout
-  ======================================================= -->
-  <section id="about" class="section alt-bg">
-    <div class="container about-split">
-
-      <!-- Left: copy -->
-      <div class="about-copy">
-        <span class="eyebrow-tag">ABOUT IAM TECH LAB</span>
-        <h2>A delivery partner trusted to make operations easier to manage.</h2>
-        <p class="about-text">
-          IAM Tech Lab works with teams that need more than a generic app.
-          We build modern operational systems that combine tailored software,
-          connected tools, and intelligent automation.
-        </p>
-        <p class="about-text about-text-secondary">
-          Based in Metro Manila, we stay close to the business context so the
-          systems we build align with real operational needs — not just software
-          requirements. We take on a focused number of engagements so every
-          client receives dedicated senior attention from kickoff to close.
-        </p>
-
-        <!-- Three feature cards (mirrors the NeoLabs card strip) -->
-        <div class="about-pillars">
-          <div class="about-pillar">
-            <span class="about-pillar-label">WORKFLOW-FIRST DELIVERY</span>
-            <p>We shape systems around the approvals, tools, and daily work your team already manages.</p>
-          </div>
-          <div class="about-pillar">
-            <span class="about-pillar-label">CLEAR BUSINESS OUTCOMES</span>
-            <p>Clients trust us to reduce manual work, connect operations, and improve visibility without unnecessary complexity.</p>
-          </div>
-          <div class="about-pillar">
-            <span class="about-pillar-label">CLEANER DIGITAL OPERATIONS</span>
-            <p>We help teams replace paper-heavy steps and disconnected records with trackable digital workflows.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right: photo -->
-      <div class="about-image">
-        <img src="photos/office photo.jpg" alt="IAM Tech Lab consultants collaborating in a working session" />
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ======================================================
-       SERVICES SECTION — rendered as a wall of server-rack
-       altars: each card is a vertical unit with mounting
-       rails, ventilation grilles, and a glowing status LED,
-       like holographic stained glass set into a reliquary.
-  ======================================================= -->
-  <section id="services" class="section services-altar-section">
-    <div class="container">
-      <span class="eyebrow-tag">OUR SERVICES</span>
-
-      <div class="section-heading-row">
-        <div class="section-heading-text">
-          <h2>End-to-end technology services, scoped precisely to your organization's priorities.</h2>
-          <p class="section-subtitle">
-            Each engagement is tailored to your context — we do not sell packages
-            that weren't designed with your business in mind.
-          </p>
-        </div>
-        <a href="#contact" class="btn btn-outline section-heading-cta">Request a Scope</a>
-      </div>
-
-      <div class="services-grid">
-
-        <div class="service-card">
-          <div class="rack-rail rack-rail-left" aria-hidden="true"></div>
-          <div class="rack-rail rack-rail-right" aria-hidden="true"></div>
-          <div class="rack-led" aria-hidden="true"></div>
-          <div class="service-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          </div>
-          <h3>Web &amp; Application Development</h3>
-          <p>Enterprise-grade web platforms and business applications, built to integrate with your existing systems and scale alongside your operations.</p>
-          <a href="#contact" class="service-link">Learn more →</a>
-          <div class="rack-vents" aria-hidden="true">
-            <span></span><span></span><span></span><span></span><span></span><span></span>
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div class="rack-rail rack-rail-left" aria-hidden="true"></div>
-          <div class="rack-rail rack-rail-right" aria-hidden="true"></div>
-          <div class="rack-led" aria-hidden="true"></div>
-          <div class="service-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
-          </div>
-          <h3>Infrastructure &amp; Systems Architecture</h3>
-          <p>Strategic design and implementation of cloud, hybrid, and on-premise infrastructure that reduces cost, improves uptime, and supports future growth.</p>
-          <a href="#contact" class="service-link">Learn more →</a>
-          <div class="rack-vents" aria-hidden="true">
-            <span></span><span></span><span></span><span></span><span></span><span></span>
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div class="rack-rail rack-rail-left" aria-hidden="true"></div>
-          <div class="rack-rail rack-rail-right" aria-hidden="true"></div>
-          <div class="rack-led" aria-hidden="true"></div>
-          <div class="service-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-          </div>
-          <h3>Technology Enablement &amp; Training</h3>
-          <p>Structured capability-building programs for your team — from platform adoption and workflow automation to role-specific digital competency frameworks.</p>
-          <a href="#contact" class="service-link">Learn more →</a>
-          <div class="rack-vents" aria-hidden="true">
-            <span></span><span></span><span></span><span></span><span></span><span></span>
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div class="rack-rail rack-rail-left" aria-hidden="true"></div>
-          <div class="rack-rail rack-rail-right" aria-hidden="true"></div>
-          <div class="rack-led" aria-hidden="true"></div>
-          <div class="service-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
-          </div>
-          <h3>Technology Strategy &amp; Advisory</h3>
-          <p>Executive-level guidance on vendor selection, digital roadmaps, platform consolidation, and investment prioritization — grounded in your business objectives.</p>
-          <a href="#contact" class="service-link">Learn more →</a>
-          <div class="rack-vents" aria-hidden="true">
-            <span></span><span></span><span></span><span></span><span></span><span></span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ======================================================
-       PROCESS SECTION
-  ======================================================= -->
   <section id="process" class="section alt-bg">
     <div class="container">
       <span class="eyebrow-tag">HOW WE WORK</span>
@@ -342,7 +176,7 @@
             sequenced to protect your timelines and budget.
           </p>
         </div>
-        <a href="#contact" class="btn btn-outline section-heading-cta">Start the Conversation</a>
+        <a href="contact.html" class="btn btn-outline section-heading-cta">Start the Conversation</a>
       </div>
 
       <div class="process-grid">
@@ -370,9 +204,6 @@
     </div>
   </section>
 
-  <!-- ======================================================
-       PRICING SECTION
-  ======================================================= -->
   <section id="pricing" class="section">
     <div class="container">
       <span class="eyebrow-tag">PRICING</span>
@@ -385,7 +216,7 @@
             to your specific requirements — no surprises, no hidden fees.
           </p>
         </div>
-        <a href="#contact" class="btn btn-outline section-heading-cta">Request a Quote</a>
+        <a href="contact.html" class="btn btn-outline section-heading-cta">Request a Quote</a>
       </div>
 
       <div class="pricing-grid">
@@ -399,7 +230,7 @@
             <li>Sample recommendation document</li>
             <li>No commitment required</li>
           </ul>
-          <a href="#contact" class="btn btn-outline pricing-cta">Get Started</a>
+          <a href="contact.html" class="btn btn-outline pricing-cta">Get Started</a>
         </div>
         <div class="pricing-card">
           <p class="pricing-tier">Starter</p>
@@ -411,7 +242,7 @@
             <li>Written scope of work</li>
             <li>30-day post-launch support</li>
           </ul>
-          <a href="#contact" class="btn btn-outline pricing-cta">Get Started</a>
+          <a href="contact.html" class="btn btn-outline pricing-cta">Get Started</a>
         </div>
         <div class="pricing-card pricing-card-featured">
           <p class="pricing-badge">Most Popular</p>
@@ -425,7 +256,7 @@
             <li>90-day post-launch support</li>
             <li>Team enablement sessions</li>
           </ul>
-          <a href="#contact" class="btn btn-primary pricing-cta">Get Started</a>
+          <a href="contact.html" class="btn btn-primary pricing-cta">Get Started</a>
         </div>
         <div class="pricing-card">
           <p class="pricing-tier">Scale</p>
@@ -438,15 +269,12 @@
             <li>Priority support &amp; SLA agreement</li>
             <li>Quarterly strategic reviews</li>
           </ul>
-          <a href="#contact" class="btn btn-outline pricing-cta">Get Started</a>
+          <a href="contact.html" class="btn btn-outline pricing-cta">Get Started</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ======================================================
-       TESTIMONIAL SECTION
-  ======================================================= -->
   <section class="section testimonial-section alt-bg">
     <div class="container">
       <span class="eyebrow-tag">CLIENT PERSPECTIVE</span>
@@ -469,9 +297,6 @@
     </div>
   </section>
 
-  <!-- ======================================================
-       FINAL CTA SECTION
-  ======================================================= -->
   <section id="get-started" class="section cta-band">
     <div class="container final-cta">
       <div class="final-cta-text">
@@ -482,100 +307,10 @@
           We'll assess your needs and outline a clear path forward within 48 hours.
         </p>
       </div>
-      <a href="#contact" class="btn btn-primary final-cta-btn">Schedule a Consultation</a>
+      <a href="contact.html" class="btn btn-primary final-cta-btn">Schedule a Consultation</a>
     </div>
   </section>
 
-  <!-- ======================================================
-       CONTACT SECTION
-  ======================================================= -->
-  <section id="contact" class="section alt-bg">
-    <div class="container">
-      <span class="eyebrow-tag">CONTACT US</span>
-      <h2>Start the conversation.</h2>
-      <p class="section-subtitle">
-        Complete the form below and a senior consultant will respond within one business day.
-      </p>
-
-      <form id="contactForm" novalidate aria-label="Contact form" class="contact-form-dark">
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="name">Full name</label>
-            <input type="text" id="name" name="name" placeholder="Your full name" aria-describedby="nameError" required />
-            <span class="error-message" id="nameError" role="alert"></span>
-          </div>
-
-          <div class="form-group">
-            <label for="businessEmail">Business email</label>
-            <input type="email" id="businessEmail" name="businessEmail" placeholder="you@company.com" aria-describedby="emailError" required />
-            <span class="error-message" id="emailError" role="alert"></span>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="companySize">Organization size</label>
-            <select id="companySize" name="companySize" aria-describedby="companySizeError" required>
-              <option value="">Select size</option>
-              <option value="1-10">1–10 employees</option>
-              <option value="11-50">11–50 employees</option>
-              <option value="51-200">51–200 employees</option>
-              <option value="200+">200+ employees</option>
-            </select>
-            <span class="error-message" id="companySizeError" role="alert"></span>
-          </div>
-
-          <div class="form-group">
-            <label for="packageFit">Package</label>
-            <select id="packageFit" name="packageFit" aria-describedby="packageError" required>
-              <option value="">Select package</option>
-              <option value="free-trial">Free Trial</option>
-              <option value="starter">Starter</option>
-              <option value="growth">Growth</option>
-              <option value="scale">Scale</option>
-              <option value="not-sure">Not sure yet</option>
-            </select>
-            <span class="error-message" id="packageError" role="alert"></span>
-          </div>
-
-          <div class="form-group">
-            <label for="projectLevel">Project level</label>
-            <select id="projectLevel" name="projectLevel" aria-describedby="levelError" required>
-              <option value="">Select level</option>
-              <option value="basic-rollout">Basic app rollout</option>
-              <option value="operational-dashboards">Operational app with dashboards</option>
-              <option value="automation-integrations">Automation and integrations</option>
-              <option value="enterprise-government">Enterprise / government workflow</option>
-            </select>
-            <span class="error-message" id="levelError" role="alert"></span>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="callTime">Preferred consultation time (optional)</label>
-          <input type="datetime-local" id="callTime" name="callTime" />
-        </div>
-
-        <div class="form-group">
-          <label for="summary">Project brief</label>
-          <textarea id="summary" name="summary" rows="5" placeholder="Describe the business problem you need to solve, the systems involved, and any relevant constraints or timelines." aria-describedby="summaryError" required></textarea>
-          <span class="error-message" id="summaryError" role="alert"></span>
-        </div>
-
-        <div class="form-footer">
-          <button type="submit" class="btn btn-inquiry">Submit Inquiry</button>
-          <p id="formSuccess" class="form-success" role="status" aria-live="polite"></p>
-        </div>
-      </form>
-
-      <p class="form-disclaimer">By submitting this form you consent to IAM Tech Lab contacting you regarding your inquiry. Your information is handled in accordance with our Privacy Policy and will not be shared with third parties.</p>
-    </div>
-  </section>
-
-  <!-- ======================================================
-       FOOTER
-  ======================================================= -->
   <footer class="site-footer">
     <div class="container footer-grid">
       <div class="footer-brand">
@@ -595,12 +330,11 @@
       <div class="footer-links">
         <p class="footer-heading">Company</p>
         <ul>
-          <li><a href="#hero">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#process">Process</a></li>
-          <li><a href="#pricing">Pricing</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
 
@@ -618,7 +352,6 @@
     </div>
   </footer>
 
-  <!-- JavaScript — loaded last so the DOM is ready -->
   <script src="script.js"></script>
 </body>
 </html>
