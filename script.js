@@ -5,6 +5,8 @@
 //   2. Mobile Menu Toggle
 //   3. "Get a Quick Tech Insight" button functionality
 //   4. Contact form validation, Modal Review, and submission
+//   5. Scroll Reveal Animations
+//   6. Cyber-Divine Animation Suite
 // =========================================================
 
 // ---------- 0. Theme Management ----------
@@ -159,7 +161,6 @@ if (contactForm) {
   const summaryError = document.getElementById("summaryError");
   const formSuccess = document.getElementById("formSuccess");
 
-  // Modal Elements
   const confirmationModal = document.getElementById("confirmationModal");
   const modalCloseOverlay = document.getElementById("modalCloseOverlay");
   const btnCancel = document.getElementById("btnCancel");
@@ -328,3 +329,124 @@ if (contactForm) {
       });
   }
 }
+
+// ---------- 4. Scroll Reveal Animations ----------
+
+const revealElements = document.querySelectorAll(".reveal");
+
+const revealOptions = {
+  threshold: 0.15, 
+  rootMargin: "0px 0px -50px 0px" 
+};
+
+const revealObserver = new IntersectionObserver((entries, observer) => {
+  entries.forEach((entry, index) => {
+    if (!entry.isIntersecting) return;
+
+    setTimeout(() => {
+      entry.target.classList.add("active");
+    }, index * 100); 
+
+    observer.unobserve(entry.target);
+  });
+}, revealOptions);
+
+revealElements.forEach(el => {
+  revealObserver.observe(el);
+});
+
+// ---------- 5. Cyber-Divine Animation Suite ----------
+
+// --- Animation 1: AI Decode Text Reveal ---
+const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*";
+const haloTexts = document.querySelectorAll(".halo-text");
+
+haloTexts.forEach(el => {
+  const originalText = el.innerText;
+  let iterations = 0;
+  
+  const interval = setInterval(() => {
+    el.innerText = originalText.split("").map((letter, index) => {
+      // Reveal the correct letter once the iteration passes its index
+      if (index < iterations) {
+        return originalText[index];
+      }
+      // Otherwise, return a random scrambled character
+      return letters[Math.floor(Math.random() * letters.length)];
+    }).join("");
+    
+    // Stop the loop once the whole word is spelled out
+    if (iterations >= originalText.length) {
+      clearInterval(interval);
+      el.innerText = originalText; // Failsafe to ensure exact string
+    }
+    iterations += 1 / 3; // Controls the speed of the decode
+  }, 30);
+});
+
+// --- Animation 2 & 3: 3D Tilt and Mouse-Tracking Glow ---
+const dynamicCards = document.querySelectorAll(".value-card, .service-card, .pricing-card-extended, .process-step");
+
+dynamicCards.forEach(card => {
+  card.addEventListener("mousemove", (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    // Feed exact mouse coordinates to CSS variables for the Glow
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+    
+    // Calculate 3D Tilt mathematics
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -4; // Max 4 degree tilt
+    const rotateY = ((x - centerX) / centerX) * 4;
+    
+    // Remove CSS transition during movement so it tracks instantly without lag
+    card.style.transition = "none";
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+  });
+  
+  card.addEventListener("mouseleave", () => {
+    // Restore smooth CSS transition and snap the card back to flat
+    card.style.transition = "transform 0.5s ease, box-shadow 0.5s ease";
+    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)`;
+  });
+});
+
+// --- Animation 4: Dynamic Number Counting ---
+const countElements = document.querySelectorAll(".count-up");
+
+const countObserver = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    
+    // Grab the target number from the HTML attribute
+    const targetAttr = entry.target.getAttribute("data-target");
+    if(!targetAttr) return; // Ignore if attribute is missing
+    
+    const target = +targetAttr;
+    const duration = 1500; // 1.5 seconds to finish counting
+    const increment = target / (duration / 16); // Assuming 60fps
+    
+    let current = 0;
+    const updateCounter = () => {
+      current += increment;
+      if (current < target) {
+        entry.target.innerText = Math.ceil(current).toLocaleString();
+        requestAnimationFrame(updateCounter);
+      } else {
+        // Animation finished, snap to target string format
+        entry.target.innerText = target.toLocaleString();
+      }
+    };
+    updateCounter(); // Start the counting loop
+    
+    observer.unobserve(entry.target);
+  });
+}, { threshold: 0.5 }); // Trigger when 50% of the number is visible
+
+countElements.forEach(el => {
+  countObserver.observe(el);
+});

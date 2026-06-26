@@ -2038,3 +2038,70 @@ main {
   gap: 16px;
   justify-content: flex-end;
 }
+
+/* =========================================================
+   26. SCROLL REVEAL ANIMATIONS
+========================================================= */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px); 
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================================================
+   27. HERO SECTION LOAD SEQUENCE
+========================================================= */
+
+@keyframes fadeUpHero {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-text-wrap h1 {
+  opacity: 0;
+  animation: fadeUpHero 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-text-wrap .hero-text {
+  opacity: 0;
+  animation: fadeUpHero 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+}
+
+.hero-text-wrap .hero-buttons {
+  opacity: 0;
+  animation: fadeUpHero 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+}
+
+/* Activate the Mouse Glow on dynamic cards */
+.value-card::after, 
+.service-card::after, 
+.pricing-card-extended::after, 
+.process-step::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    600px circle at var(--mouse-x) var(--mouse-y), 
+    rgba(0, 229, 255, 0.08), 
+    transparent 40%
+  );
+  z-index: -1;
+  pointer-events: none;
+}
