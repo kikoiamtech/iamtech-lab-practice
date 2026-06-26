@@ -1,9 +1,10 @@
 // =========================================================
-// IAM TECH LAB — JAVASCRIPT
+// IAM TECH — JAVASCRIPT
 // This file handles:
 //   1. Theme switching (dark mode / light mode)
-//   2. "Get a Quick Tech Insight" button functionality
-//   3. Contact form validation and submission
+//   2. Mobile Menu Toggle
+//   3. "Get a Quick Tech Insight" button functionality
+//   4. Contact form validation, Modal Review, and submission
 // =========================================================
 
 // ---------- 0. Theme Management ----------
@@ -130,7 +131,6 @@ function showRandomTip() {
   displayTip(randomTip);
 }
 
-// Safely bind event listeners only if elements exist (e.g. index.html)
 if (tipButton && tipMessage) {
   tipButton.addEventListener("click", showRandomTip);
   tipButton.addEventListener("keypress", function (event) {
@@ -138,11 +138,10 @@ if (tipButton && tipMessage) {
   });
 }
 
-// ---------- 3. Contact Form Validation ----------
+// ---------- 3. Contact Form Validation & Modal Logic ----------
 
 const contactForm = document.getElementById("contactForm");
 
-// Wrap form logic inside a null check (e.g. for contact.html)
 if (contactForm) {
   const nameInput = document.getElementById("name");
   const emailInput = document.getElementById("businessEmail");
@@ -158,8 +157,19 @@ if (contactForm) {
   const packageError = document.getElementById("packageError");
   const levelError = document.getElementById("levelError");
   const summaryError = document.getElementById("summaryError");
-
   const formSuccess = document.getElementById("formSuccess");
+
+  // Modal Elements
+  const confirmationModal = document.getElementById("confirmationModal");
+  const modalCloseOverlay = document.getElementById("modalCloseOverlay");
+  const btnCancel = document.getElementById("btnCancel");
+  const btnConfirm = document.getElementById("btnConfirm");
+  const sumName = document.getElementById("sumName");
+  const sumEmail = document.getElementById("sumEmail");
+  const sumSize = document.getElementById("sumSize");
+  const sumPackage = document.getElementById("sumPackage");
+  const sumLevel = document.getElementById("sumLevel");
+  let pendingSubmissionData = null;
 
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -191,6 +201,10 @@ if (contactForm) {
     }
   }
 
+  function formatDropdownText(selectElement) {
+    return selectElement.options[selectElement.selectedIndex].text;
+  }
+
   const validators = {
     name:         (value) => value === "" ? "Please enter your full name." : "",
     email:        (value) => {
@@ -208,15 +222,13 @@ if (contactForm) {
     }
   };
 
-  // Real-time validation on blur
-  nameInput.addEventListener("blur",          () => validateField(nameInput, nameError, validators.name));
-  emailInput.addEventListener("blur",         () => validateField(emailInput, emailError, validators.email));
-  companySizeInput.addEventListener("blur",   () => validateSelect(companySizeInput, companySizeError, validators.companySize));
-  packageFitInput.addEventListener("blur",    () => validateSelect(packageFitInput, packageError, validators.packageFit));
-  projectLevelInput.addEventListener("blur",  () => validateSelect(projectLevelInput, levelError, validators.projectLevel));
-  summaryInput.addEventListener("blur",       () => validateField(summaryInput, summaryError, validators.summary));
+  nameInput.addEventListener("blur", () => validateField(nameInput, nameError, validators.name));
+  emailInput.addEventListener("blur", () => validateField(emailInput, emailError, validators.email));
+  companySizeInput.addEventListener("blur", () => validateSelect(companySizeInput, companySizeError, validators.companySize));
+  packageFitInput.addEventListener("blur", () => validateSelect(packageFitInput, packageError, validators.packageFit));
+  projectLevelInput.addEventListener("blur", () => validateSelect(projectLevelInput, levelError, validators.projectLevel));
+  summaryInput.addEventListener("blur", () => validateField(summaryInput, summaryError, validators.summary));
 
-  // Google Apps Script deployment URL
   const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwNVg3OfOkCtNOv-cw_YmipGJUnu8cdt_osplJytUvvdsa0fomkOT0B4cAqPZy1Bcn_SA/exec";
 
   contactForm.addEventListener("submit", function (event) {
@@ -231,7 +243,7 @@ if (contactForm) {
     const isSummaryValid      = validateField(summaryInput, summaryError, validators.summary);
 
     if (isNameValid && isEmailValid && isCompanySizeValid && isPackageValid && isLevelValid && isSummaryValid) {
-      submitToGoogleSheet({
+      pendingSubmissionData = {
         name:         nameInput.value.trim(),
         email:        emailInput.value.trim(),
         companySize:  companySizeInput.value,
@@ -239,7 +251,30 @@ if (contactForm) {
         projectLevel: projectLevelInput.value,
         callTime:     callTimeInput.value,
         summary:      summaryInput.value.trim()
-      });
+      };
+
+      sumName.textContent = pendingSubmissionData.name;
+      sumEmail.textContent = pendingSubmissionData.email;
+      sumSize.textContent = formatDropdownText(companySizeInput);
+      sumPackage.textContent = formatDropdownText(packageFitInput);
+      sumLevel.textContent = formatDropdownText(projectLevelInput);
+
+      confirmationModal.classList.remove("hidden");
+    }
+  });
+
+  function hideModal() {
+    confirmationModal.classList.add("hidden");
+  }
+
+  btnCancel.addEventListener("click", hideModal);
+  modalCloseOverlay.addEventListener("click", hideModal);
+
+  btnConfirm.addEventListener("click", function() {
+    hideModal();
+    if (pendingSubmissionData) {
+      submitToGoogleSheet(pendingSubmissionData);
+      pendingSubmissionData = null;
     }
   });
 
@@ -268,11 +303,7 @@ if (contactForm) {
       })
       .then(result => {
         let parsed;
-        try {
-          parsed = JSON.parse(result);
-        } catch (e) {
-          parsed = { success: true };
-        }
+        try { parsed = JSON.parse(result); } catch (e) { parsed = { success: true }; }
 
         if (parsed.success !== false) {
           formSuccess.textContent = "Your inquiry has been received. A senior consultant will be in touch within one business day.";

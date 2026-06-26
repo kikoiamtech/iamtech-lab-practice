@@ -1246,6 +1246,20 @@ img {
 }
 
 /* ---------- 14. Contact form ---------- */
+
+/* Contact page layout — replaces the inline styles removed from the HTML
+   so responsive overrides in media queries can win without !important */
+.contact-section {
+  padding-top: 150px;
+  min-height: 100vh;
+}
+
+.contact-grid {
+  align-items: start;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 64px;
+}
+
 #contact h2 {
   font-size: clamp(1.8rem, 3vw, 2.3rem);
   margin-bottom: 14px;
@@ -1269,6 +1283,12 @@ img {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
+}
+
+/* When a form-row has 3 children (the selects row), let them wrap
+   so all three get full attention on narrower viewports */
+.form-row > :nth-child(3):last-child {
+  grid-column: 1 / -1;
 }
 
 .form-group {
@@ -1509,12 +1529,30 @@ img {
     display: flex;
   }
 
+  /* !important is required on this group: about.html, services.html,
+     and index.html set fixed column counts via inline
+     style="grid-template-columns: ..." on these same elements, which
+     otherwise beats any non-!important rule in this stylesheet
+     regardless of media query. */
   .value-grid,
   .services-grid,
   .process-grid,
   .hero-stats,
-  .footer-grid {
-    grid-template-columns: 1fr;
+  .footer-grid,
+  .grid-2x2,
+  .about-pillars {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Same inline-style problem on contact.html and services.html:
+     .about-split carries an inline 2-column override that the
+     1024px rule above can't beat. !important here forces the stack. */
+  .about-split,
+  .pricing-hero-split,
+  .responsibility-panel,
+  .scale-deep-dive {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
   }
 
   .section-heading-row {
@@ -1538,6 +1576,50 @@ img {
   .contact-form-dark {
     padding: 26px;
   }
+
+  /* ---- Contact page mobile fixes ---- */
+
+  /* The contact section has inline padding-top:150px — override it */
+  #contact.section {
+    padding-top: 100px !important;
+  }
+
+  .contact-section {
+    padding-top: 100px;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  /* The contact image should be shorter on mobile so the form is
+     reached sooner without excessive scrolling */
+  .contact-right-column .about-image img {
+    aspect-ratio: 16 / 7;
+  }
+
+  /* The three-select form-row: stack all on mobile */
+  .form-row {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Reset the "third child spans full row" trick since we're
+     already fully stacked */
+  .form-row > :nth-child(3):last-child {
+    grid-column: auto;
+  }
+
+  /* Ensure the modal action buttons stack on very small screens */
+  .modal-actions {
+    flex-direction: column-reverse;
+    gap: 12px;
+  }
+
+  .modal-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1548,6 +1630,18 @@ img {
 
   .hero-buttons .btn {
     width: 100%;
+  }
+
+  /* Give the contact form more breathing room on small phones */
+  .contact-form-dark {
+    padding: 20px 16px;
+  }
+
+  /* Ensure selects/inputs are not clipped on small phones */
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-size: 1rem; /* prevents iOS auto-zoom on focus */
   }
 }
 
@@ -1818,7 +1912,13 @@ main {
     gap: 32px;
   }
 
+  /* .next-step-box is `display: flex`, not grid, so the
+     grid-template-columns rule above does nothing to it — it needs
+     flex-direction: column to actually stack the heading above the
+     button instead of squeezing them into a row. */
   .next-step-box {
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     justify-content: center;
     padding: 40px;
@@ -1835,4 +1935,106 @@ main {
   body > section:first-of-type:not(.hero) {
     padding-top: 110px !important;
   }
+}
+
+/* ---------- 25. Confirmation Modal ---------- */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 37, 64, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.modal-content {
+  position: relative;
+  z-index: 2;
+  background: var(--glass-fill);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 40px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: var(--shadow-glow-lg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+}
+
+.modal.hidden .modal-content {
+  transform: translateY(20px);
+}
+
+.modal-content h3 {
+  margin-top: 12px;
+  margin-bottom: 8px;
+  font-size: 2rem;
+}
+
+/* Placed after the base .modal-content rule above (not inside the
+   earlier 768px block) on purpose: same selector/specificity, so
+   whichever comes later in the file wins the cascade once the media
+   query matches. Putting it earlier in the file would have it
+   silently overridden by the unconditional rule above. */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 24px;
+  }
+}
+
+.summary-list {
+  background: var(--glass-fill-strong);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.summary-list li {
+  font-size: 0.95rem;
+  color: var(--color-text-light);
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 191, 255, 0.1);
+  padding-bottom: 8px;
+}
+
+.summary-list li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.summary-list strong {
+  color: var(--color-primary);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
 }

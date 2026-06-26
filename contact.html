@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact Us — IAM Tech Lab</title>
+  <title>Contact Us — IAM Tech</title>
 
-  <meta name="description" content="Get in touch with IAM Tech Lab for enterprise-grade technology solutions." />
+  <meta name="description" content="Get in touch with IAM Tech for AI-powered software, custom business systems, and digital transformation." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -26,10 +26,10 @@
   <header class="site-header">
     <div class="container nav-wrapper">
       <a href="index.html" class="logo-block">
-        <img src="photos/company_logo.png" alt="IAM Tech Lab" class="logo-icon" width="36" height="36" />
+        <img src="photos/company_logo.png" alt="IAM Tech" class="logo-icon" width="36" height="36" />
         <span class="logo-text">
-          <span class="logo">IAM <span>Tech Lab</span></span>
-          <span class="logo-tagline">Enterprise Technology Solutions</span>
+          <span class="logo">IAM <span>Tech</span></span>
+          <span class="logo-tagline">AI-Powered Systems</span>
         </span>
       </a>
 
@@ -59,87 +59,123 @@
     </div>
   </header>
 
-  <section id="contact" class="section alt-bg" style="padding-top: 150px; min-height: 100vh;">
-    <div class="container">
-      <span class="eyebrow-tag">CONTACT US</span>
-      <h2>Start the conversation.</h2>
-      <p class="section-subtitle">
-        Complete the form below and a senior consultant will respond within one business day.
-      </p>
+  <section id="contact" class="section alt-bg contact-section">
+    <div class="container about-split contact-grid">
+      
+      <!-- Left Column: Copy & Info Cards -->
+      <div class="about-copy">
+        <span class="eyebrow-tag">CONTACT US</span>
+        <h2 style="font-size: clamp(2.4rem, 4.5vw, 3.8rem); line-height: 1.1; margin-bottom: 24px;">
+          Tell us what needs to run better.
+        </h2>
+        <p class="about-text" style="margin-bottom: 40px; font-size: 1.1rem; line-height: 1.6;">
+          Share the bottlenecks, tools, or manual steps you want to improve and we will help shape the right next step.
+        </p>
 
-      <form id="contactForm" novalidate aria-label="Contact form" class="contact-form-dark">
+        <div class="scale-cards-stack">
+          <div class="scale-feature-block" style="background: var(--glass-fill); padding: 24px; margin-bottom: 8px;">
+            <h4 style="color: var(--color-accent); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px;">Best Fit</h4>
+            <p style="font-size: 0.95rem; color: var(--color-text-light);">Teams that need less manual work, smoother operations, and a build that fits their current setup.</p>
+          </div>
+          
+          <div class="scale-feature-block" style="background: var(--glass-fill); padding: 24px; margin-bottom: 8px;">
+            <h4 style="color: var(--color-accent); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px;">Expected Outcomes</h4>
+            <p style="font-size: 0.95rem; color: var(--color-text-light);">We usually help clients improve visibility, connect tools, remove repetitive steps, and tighten control.</p>
+          </div>
+          
+          <div class="scale-feature-block" style="background: var(--glass-fill); padding: 24px; margin-bottom: 8px;">
+            <h4 style="color: var(--color-accent); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px;">Helpful Details</h4>
+            <p style="font-size: 0.95rem; color: var(--color-text-light);">Share your workflow complexity, integrations, reporting needs, timeline, and any must-have alerts.</p>
+          </div>
 
-        <div class="form-row">
-          <div class="form-group">
-            <label for="name">Full name</label>
-            <input type="text" id="name" name="name" placeholder="Your full name" aria-describedby="nameError" required />
-            <span class="error-message" id="nameError" role="alert"></span>
+          <div class="scale-feature-block" style="background: var(--glass-fill); padding: 24px;">
+            <h4 style="color: var(--color-accent); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px;">Direct Contact</h4>
+            <p style="font-size: 0.95rem; color: var(--color-text-light);">
+              <a href="mailto:kiko@iamtech.ph" style="color: var(--color-text); text-decoration: underline; text-decoration-color: var(--color-accent);">kiko@iamtech.ph</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Image & Form -->
+      <div class="contact-right-column">
+        
+        <div class="about-image" style="margin-bottom: 24px;">
+          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&auto=format&fit=crop&q=80" alt="Consultants working together" style="width: 100%; height: 100%; object-fit: cover; aspect-ratio: 16/10;" />
+        </div>
+
+        <form id="contactForm" novalidate aria-label="Contact form" class="contact-form-dark">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Full name</label>
+              <input type="text" id="name" name="name" placeholder="Your full name" aria-describedby="nameError" required />
+              <span class="error-message" id="nameError" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="businessEmail">Business email</label>
+              <input type="email" id="businessEmail" name="businessEmail" placeholder="you@company.com" aria-describedby="emailError" required />
+              <span class="error-message" id="emailError" role="alert"></span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="companySize">Company size</label>
+              <select id="companySize" name="companySize" aria-describedby="companySizeError" required>
+                <option value="">Select size</option>
+                <option value="1-10">1–10 employees</option>
+                <option value="11-50">11–50 employees</option>
+                <option value="51-200">51–200 employees</option>
+                <option value="200+">200+ employees</option>
+              </select>
+              <span class="error-message" id="companySizeError" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="packageFit">Package fit</label>
+              <select id="packageFit" name="packageFit" aria-describedby="packageError" required>
+                <option value="">Select package</option>
+                <option value="free-trial">Free Trial</option>
+                <option value="starter">Starter</option>
+                <option value="growth">Growth</option>
+                <option value="scale">Scale</option>
+                <option value="not-sure">Not sure yet</option>
+              </select>
+              <span class="error-message" id="packageError" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="projectLevel">Project level</label>
+              <select id="projectLevel" name="projectLevel" aria-describedby="levelError" required>
+                <option value="">Select level</option>
+                <option value="basic-rollout">Basic app rollout</option>
+                <option value="operational-dashboards">Operational app with dashboards</option>
+                <option value="automation-integrations">Automation and integrations</option>
+                <option value="enterprise-government">Enterprise / government workflow</option>
+              </select>
+              <span class="error-message" id="levelError" role="alert"></span>
+            </div>
           </div>
 
           <div class="form-group">
-            <label for="businessEmail">Business email</label>
-            <input type="email" id="businessEmail" name="businessEmail" placeholder="you@company.com" aria-describedby="emailError" required />
-            <span class="error-message" id="emailError" role="alert"></span>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="companySize">Organization size</label>
-            <select id="companySize" name="companySize" aria-describedby="companySizeError" required>
-              <option value="">Select size</option>
-              <option value="1-10">1–10 employees</option>
-              <option value="11-50">11–50 employees</option>
-              <option value="51-200">51–200 employees</option>
-              <option value="200+">200+ employees</option>
-            </select>
-            <span class="error-message" id="companySizeError" role="alert"></span>
+            <label for="callTime">Preferred call time (optional)</label>
+            <input type="datetime-local" id="callTime" name="callTime" />
           </div>
 
           <div class="form-group">
-            <label for="packageFit">Package</label>
-            <select id="packageFit" name="packageFit" aria-describedby="packageError" required>
-              <option value="">Select package</option>
-              <option value="free-trial">Free Trial</option>
-              <option value="starter">Starter</option>
-              <option value="growth">Growth</option>
-              <option value="scale">Scale</option>
-              <option value="not-sure">Not sure yet</option>
-            </select>
-            <span class="error-message" id="packageError" role="alert"></span>
+            <label for="summary">Project summary</label>
+            <textarea id="summary" name="summary" rows="5" placeholder="Share the workflows, systems, or business problem you want to improve." aria-describedby="summaryError" required></textarea>
+            <span class="error-message" id="summaryError" role="alert"></span>
           </div>
 
-          <div class="form-group">
-            <label for="projectLevel">Project level</label>
-            <select id="projectLevel" name="projectLevel" aria-describedby="levelError" required>
-              <option value="">Select level</option>
-              <option value="basic-rollout">Basic app rollout</option>
-              <option value="operational-dashboards">Operational app with dashboards</option>
-              <option value="automation-integrations">Automation and integrations</option>
-              <option value="enterprise-government">Enterprise / government workflow</option>
-            </select>
-            <span class="error-message" id="levelError" role="alert"></span>
+          <div class="form-footer">
+            <button type="submit" class="btn btn-inquiry">Submit Inquiry</button>
+            <p id="formSuccess" class="form-success" role="status" aria-live="polite"></p>
           </div>
-        </div>
+        </form>
 
-        <div class="form-group">
-          <label for="callTime">Preferred consultation time (optional)</label>
-          <input type="datetime-local" id="callTime" name="callTime" />
-        </div>
-
-        <div class="form-group">
-          <label for="summary">Project brief</label>
-          <textarea id="summary" name="summary" rows="5" placeholder="Describe the business problem you need to solve, the systems involved, and any relevant constraints or timelines." aria-describedby="summaryError" required></textarea>
-          <span class="error-message" id="summaryError" role="alert"></span>
-        </div>
-
-        <div class="form-footer">
-          <button type="submit" class="btn btn-inquiry">Submit Inquiry</button>
-          <p id="formSuccess" class="form-success" role="status" aria-live="polite"></p>
-        </div>
-      </form>
-
-      <p class="form-disclaimer">By submitting this form you consent to IAM Tech Lab contacting you regarding your inquiry. Your information is handled in accordance with our Privacy Policy and will not be shared with third parties.</p>
+      </div>
     </div>
   </section>
 
@@ -147,12 +183,11 @@
     <div class="container footer-grid">
       <div class="footer-brand">
         <p class="footer-logo">
-          <img src="photos/company_logo.png" alt="IAM Tech Lab" class="footer-logo-icon" width="28" height="28" />
-          IAM <span>Tech Lab</span>
+          <img src="photos/company_logo.png" alt="IAM Tech" class="footer-logo-icon" width="28" height="28" />
+          IAM <span>Tech</span>
         </p>
         <p class="footer-blurb">
-          Enterprise technology solutions — web development, systems architecture,
-          digital strategy, and organizational technology enablement.
+          AI-Powered Software, Business Systems, and Digital Transformation. Secure custom systems and practical tools for businesses ready to scale.
         </p>
         <p class="footer-contact">
           <a href="mailto:kiko@iamtech.ph">kiko@iamtech.ph</a>
@@ -180,10 +215,31 @@
     </div>
 
     <div class="container footer-bottom">
-      <p>&copy; 2026 IAM Tech Lab. All rights reserved.</p>
+      <p>&copy; 2026 IAM Tech. All rights reserved.</p>
     </div>
   </footer>
+<!-- Confirmation Modal -->
+  <div id="confirmationModal" class="modal hidden" aria-hidden="true">
+    <div class="modal-overlay" id="modalCloseOverlay"></div>
+    <div class="modal-content">
+      <span class="eyebrow-tag">REVIEW INQUIRY</span>
+      <h3>Confirm your details</h3>
+      <p class="section-subtitle" style="font-size: 0.95rem; margin-bottom: 24px;">Please review your choices before sending.</p>
+      
+      <ul class="summary-list">
+        <li><strong>Name:</strong> <span id="sumName"></span></li>
+        <li><strong>Email:</strong> <span id="sumEmail"></span></li>
+        <li><strong>Company Size:</strong> <span id="sumSize"></span></li>
+        <li><strong>Package Fit:</strong> <span id="sumPackage"></span></li>
+        <li><strong>Project Level:</strong> <span id="sumLevel"></span></li>
+      </ul>
 
+      <div class="modal-actions">
+        <button type="button" id="btnCancel" class="btn btn-outline">Edit Details</button>
+        <button type="button" id="btnConfirm" class="btn btn-primary">Confirm & Send</button>
+      </div>
+    </div>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
